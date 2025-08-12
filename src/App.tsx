@@ -111,7 +111,7 @@ const professores = [
   "WENITHON CARLOS DE SOUSA 👨‍🏫",
 ].sort();
 
-// Tipagem para as reservas
+// Tipagem para as reservas salvas no Firestore
 interface Reserva {
   id: string;
   tipo: "ambiente" | "equipamento"; // Novo campo para diferenciar
@@ -123,7 +123,11 @@ interface Reserva {
   usuarioId: string;
   usuarioNome: string;
   criadoEm: string;
-  nomeRecurso?: string; // Propriedade adicionada para resolver o erro de build
+}
+
+// Nova interface para a lista de relatório, que inclui o nome do recurso
+interface ReservaComNomeRecurso extends Reserva {
+    nomeRecurso: string;
 }
 
 interface Mensagem {
@@ -150,7 +154,7 @@ export default function App() {
   const [professorSelecionado, setProfessorSelecionado] = useState<string>("");
 
   // Estado para a visualização de relatório
-  const [relatorioReservas, setRelatorioReservas] = useState<Reserva[]>([]);
+  const [relatorioReservas, setRelatorioReservas] = useState<ReservaComNomeRecurso[]>([]);
   const [loadingReservas, setLoadingReservas] = useState(false);
   const [relatorioTipo, setRelatorioTipo] = useState<
     "ambiente" | "equipamento"
@@ -263,7 +267,7 @@ export default function App() {
         })) as Reserva[];
 
         // Adiciona o nome do recurso ao objeto de reserva
-        const listaComNomes = lista.map((reserva) => {
+        const listaComNomes: ReservaComNomeRecurso[] = lista.map((reserva) => {
           const dadosRecurso =
             reserva.tipo === "ambiente"
               ? ambientes.find((amb) => amb.id === reserva.recursoId)
