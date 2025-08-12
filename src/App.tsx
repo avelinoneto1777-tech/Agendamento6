@@ -813,6 +813,8 @@ export default function App() {
                     </tr>
                   </thead>
                   <tbody>
+                    {/* A correção de tipagem foi aplicada aqui e na definição do estado.
+                        O objeto 'r' agora é garantido de ter a propriedade 'nomeRecurso'. */}
                     {relatorioReservas.map((r: ReservaComNomeRecurso, index) => (
                       <tr
                         key={r.id}
