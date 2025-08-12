@@ -118,11 +118,12 @@ interface Reserva {
   recursoId: string; // ID do ambiente ou equipamento
   data: string;
   horario: string;
-  turma?: string; // Opcional para equipamentos
+  turma?: string | null; // Opcional para equipamentos
   professor: string;
   usuarioId: string;
   usuarioNome: string;
   criadoEm: string;
+  nomeRecurso?: string; // Propriedade adicionada para resolver o erro de build
 }
 
 interface Mensagem {
