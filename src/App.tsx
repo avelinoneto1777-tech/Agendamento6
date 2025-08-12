@@ -813,7 +813,7 @@ export default function App() {
                     </tr>
                   </thead>
                   <tbody>
-                    {relatorioReservas.map((r, index) => (
+                    {relatorioReservas.map((r: ReservaComNomeRecurso, index) => (
                       <tr
                         key={r.id}
                         className={`border-b border-gray-200 transition-colors ${
